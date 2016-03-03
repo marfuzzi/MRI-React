@@ -37,7 +37,7 @@ const meetingRooms = [
         ];
 
 ReactDOM.render(
-    <div>
+    <div className="meeting-rooms">
         <MeetingRoom room={meetingRooms[0]} />
         <MeetingRoom room={meetingRooms[1]} />
         <MeetingRoom room={meetingRooms[2]} />
