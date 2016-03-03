@@ -8,31 +8,19 @@ import MeetingRoom from './meeting-room.js';
 const meetingRooms = [
             {
                 email: 'a@here.com',
-                name: "1",
-                organizer: 'a',
-                booked: false,
-                nextBookingTime: 1
+                name: "1"
             },
             {
                 email: 'b@here.com',
-                name: "2",
-                organizer: 'b',
-                booked: true,
-                nextBookingTime: 4
+                name: "2"
             },
             {
                 email: 'c@here.com',
-                name: "3",
-                organizer: 'c',
-                booked: true,
-                nextBookingTime: 10
+                name: "3"
             },
             {
                 email: 'd@here.com',
-                name: "4",
-                organizer: 'c',
-                booked: false,
-                nextBookingTime: null
+                name: "4"
             }
         ];
 
