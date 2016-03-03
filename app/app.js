@@ -5,12 +5,43 @@ import ReactDOM from 'react-dom';
 
 import MeetingRoom from './meeting-room.js';
 
+const meetingRooms = [
+            {
+                email: 'a@here.com',
+                name: "1",
+                organizer: 'a',
+                booked: false,
+                nextBookingTime: 1
+            },
+            {
+                email: 'b@here.com',
+                name: "2",
+                organizer: 'b',
+                booked: true,
+                nextBookingTime: 4
+            },
+            {
+                email: 'c@here.com',
+                name: "3",
+                organizer: 'c',
+                booked: true,
+                nextBookingTime: 10
+            },
+            {
+                email: 'd@here.com',
+                name: "4",
+                organizer: 'c',
+                booked: false,
+                nextBookingTime: null
+            }
+        ];
+
 ReactDOM.render(
     <div>
-        <MeetingRoom name="1"/>
-        <MeetingRoom name="2"/>
-        <MeetingRoom name="3"/>
-        <MeetingRoom name="4"/>
+        <MeetingRoom room={meetingRooms[0]} />
+        <MeetingRoom room={meetingRooms[1]} />
+        <MeetingRoom room={meetingRooms[2]} />
+        <MeetingRoom room={meetingRooms[3]} />
     </div>,
     document.getElementById('app-container')
 );
