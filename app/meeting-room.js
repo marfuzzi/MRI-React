@@ -1,5 +1,7 @@
 import React from 'react';
 
+import MeetingRoomName from './meeting-room-name.js';
+
 export default class MeetingRoom extends React.Component {
     
     render() {
@@ -8,7 +10,7 @@ export default class MeetingRoom extends React.Component {
         
         return (
             <div className={classesProp}>
-                {this.props.room.name}
+                <MeetingRoomName name={this.props.room.name} />    
             </div>
         );
     }
