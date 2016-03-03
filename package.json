@@ -1,0 +1,29 @@
+{
+  "name": "mri-react",
+  "version": "1.0.0",
+  "description": "MRI written using ReactJS",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tylerferguson/MRI-React.git"
+  },
+  "author": "Tyler Ferguson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tylerferguson/MRI-React/issues"
+  },
+  "homepage": "https://github.com/tylerferguson/MRI-React#readme",
+  "jspm": {
+    "directories": {
+      "baseURL": "app"
+    },
+    "devDependencies": {
+      "babel": "npm:babel-core@^5.8.24",
+      "babel-runtime": "npm:babel-runtime@^5.8.24",
+      "core-js": "npm:core-js@^1.1.4"
+    }
+  }
+}
