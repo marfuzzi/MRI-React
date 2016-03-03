@@ -3,7 +3,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import MeetingRoom from './meeting-room.js';
+
 ReactDOM.render(
-    <div>Hello World!</div>,
+    <div>
+        <MeetingRoom name="1"/>
+        <MeetingRoom name="2"/>
+        <MeetingRoom name="3"/>
+        <MeetingRoom name="4"/>
+    </div>,
     document.getElementById('app-container')
 );
