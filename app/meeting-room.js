@@ -7,7 +7,7 @@ export default class MeetingRoom extends React.Component {
     
     constructor(props) {
         super(props);
-        this.state = {meeting: {organizer: 'Tyler', startTime: 1, endTime: 4}};
+        this.state = {meeting: {organizer: 'Tyler', startTime: 1457084498007, endTime: 1457119440000}};
     }
     
     render() {

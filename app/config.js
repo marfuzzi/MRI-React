@@ -17,6 +17,7 @@ System.config({
     "babel": "npm:babel-core@5.8.35",
     "babel-runtime": "npm:babel-runtime@5.8.35",
     "core-js": "npm:core-js@1.2.6",
+    "moment": "npm:moment@2.11.2",
     "react": "npm:react@0.14.7",
     "react-dom": "npm:react-dom@0.14.7",
     "github:jspm/nodelibs-assert@0.1.0": {
@@ -48,6 +49,9 @@ System.config({
     },
     "npm:inherits@2.0.1": {
       "util": "github:jspm/nodelibs-util@0.1.0"
+    },
+    "npm:moment@2.11.2": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:path-browserify@0.0.0": {
       "process": "github:jspm/nodelibs-process@0.1.2"
