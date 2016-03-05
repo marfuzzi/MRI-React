@@ -27,13 +27,19 @@ const meetingRooms = [
         
 export default class MeetingRoomApp extends React.Component {
     
+    constructor(props) {
+        super(props);
+        this.state = {meetingRooms: meetingRooms};
+    }
+    
     render() {
+        const meetingRoomNodes = this.state.meetingRooms.map(meetingRoom => {
+            return <MeetingRoom key={meetingRoom.name} room={meetingRoom} />
+        });
+        
         return (
             <div className="meeting-rooms">
-                <MeetingRoom room={meetingRooms[0]} />
-                <MeetingRoom room={meetingRooms[1]} />
-                <MeetingRoom room={meetingRooms[2]} />
-                <MeetingRoom room={meetingRooms[3]} />
+                {meetingRoomNodes}
             </div>
         );
     }
