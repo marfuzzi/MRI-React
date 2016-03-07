@@ -3,7 +3,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import MeetingRoomApp from './meeting-room-app';
+import MeetingRoomApp from './components/meeting-room-app';
 
 ReactDOM.render(
     <MeetingRoomApp />,

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import MeetingRoom from './meeting-room.js';
-import MeetingRoomStore from './meeting-room-store.js';
+import MeetingRoomStore from '../stores/meeting-room-store.js';
 
 export default class MeetingRoomApp extends React.Component {
     
