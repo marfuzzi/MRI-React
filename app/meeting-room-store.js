@@ -59,16 +59,13 @@ class MeetingRoomStore extends EventEmitter {
     };
     
     getSchedule(email) {
-        var now = moment();
-        var start = now.toISOString();
-        var end = now.endOf('day');
-        return $.get("/office365/users/" + email + "/calendarview?startdatetime=" + start + "&enddatetime=" + end.toISOString() + "&$orderby=Start&$filter=IsCancelled eq false")
+        return $.get("/office365/users/" + email + "/calendarview?startdatetime=" + moment().toISOString() + "&enddatetime=" + moment().endOf('day').toISOString() + "&$orderby=Start&$filter=IsCancelled eq false")
             .done(response => {
                 return response.value
             })
             .fail(error => {
                 console.log(error);
-                return null
+                return null;
             });
     }
     
