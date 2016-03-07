@@ -2,26 +2,28 @@ import EventEmitter from 'events';
 import moment from 'moment';
 import $ from 'jquery';
 
+import MEETING_ROOM_CONFIG from './rooms-config.js';
+
 const CHANGE_EVENT = 'change';
 const meetingRooms = [
             {
-                email: 'a@here.com',
-                name: "1",
+                email: MEETING_ROOM_CONFIG.ROOM_1.email,
+                name: MEETING_ROOM_CONFIG.ROOM_1.name,
                 schedule: null
             },
             {
-                email: 'b@here.com',
-                name: "2",
+                email: MEETING_ROOM_CONFIG.ROOM_2.email,
+                name: MEETING_ROOM_CONFIG.ROOM_2.name,
                 schedule: null
             },
             {
-                email: 'c@here.com',
-                name: "3",
+                email: MEETING_ROOM_CONFIG.ROOM_3.email,
+                name: MEETING_ROOM_CONFIG.ROOM_3.name,
                 schedule: null
             },
             {
-                email: 'd@here.com',
-                name: "4",
+                email: MEETING_ROOM_CONFIG.ROOM_4.email,
+                name: MEETING_ROOM_CONFIG.ROOM_4.name,
                 schedule: null
             }
         ];

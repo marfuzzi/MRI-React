@@ -4,7 +4,7 @@ import moment from 'moment';
 export default class MeetingDetail extends React.Component{
     
     constructStatusMessage() {
-        if (!this.props.meeting) return "There's been a problem. Updates should be back soon.";
+        if (this.props.meeting === null) return "There's been a problem. Updates should be back soon.";
         if (!this.props.isAvailable) return `Busy until ${moment(this.props.meeting.endTime).format('HH:mm')}`; 
         if (!this.props.meeting) return 'Free all day';
         return `Free until ${moment(this.props.meeting.startTime).format('HH:mm')}`;
@@ -18,7 +18,7 @@ export default class MeetingDetail extends React.Component{
         return (
             <div className="meeting-room-content">
                 <span className="status">
-                    <div className={this.props.meeting ? 'status-message' : 'error-message'}>{statusMessage}</div>
+                    <div className={(this.props.meeting === null) ? 'error-message' : 'status-message'}>{statusMessage}</div>
                     {organizerNode}
                 </span>
             </div>
