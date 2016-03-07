@@ -2,7 +2,7 @@ import EventEmitter from 'events';
 import moment from 'moment';
 import $ from 'jquery';
 
-import MEETING_ROOM_CONFIG from './rooms-config.js';
+import MEETING_ROOM_CONFIG from './app-config/rooms-config.js';
 
 const CHANGE_EVENT = 'change';
 const meetingRooms = [
