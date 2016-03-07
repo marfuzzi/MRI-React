@@ -26,7 +26,8 @@ export default class MeetingRoomApp extends React.Component {
         );
     }
     
-    onChange() {
+    onChange(event) {
+        console.log(event);
         this.setState(this.getMeetingRoomStates());
     }
     

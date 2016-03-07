@@ -8,7 +8,8 @@ export default class MeetingRoom extends React.Component {
     
     constructor(props) {
         super(props)
-        this.nextMeeting = props.room.schedule[0];  
+        if(props.room.schedule === null) this.nextMeeting = null;
+        else this.nextMeeting = props.room.schedule[0]; 
     }
     
     get isAvailable() {
@@ -18,8 +19,13 @@ export default class MeetingRoom extends React.Component {
     }
     
     render() {
-        const isAvailable = this.isAvailable;
-        const classesProp = `room meeting-room-${this.props.room.name} ${isAvailable ? 'free-room' : 'busy-room'}`;
+        let classesProp = `room meeting-room-${this.props.room.name}`;
+        let isAvailable;
+        
+        if(this.nextMeeting !== null) {
+            isAvailable = this.isAvailable;
+            classesProp += ` ${isAvailable ? 'free-room' : 'busy-room'}`;
+        }
         
         return (
             <div className={classesProp}>

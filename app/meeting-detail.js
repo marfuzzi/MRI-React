@@ -4,6 +4,7 @@ import moment from 'moment';
 export default class MeetingDetail extends React.Component{
     
     constructStatusMessage() {
+        if (!this.props.meeting) return "There's been a problem. Updates should be back soon.";
         if (!this.props.isAvailable) return `Busy until ${moment(this.props.meeting.endTime).format('HH:mm')}`; 
         if (!this.props.meeting) return 'Free all day';
         return `Free until ${moment(this.props.meeting.startTime).format('HH:mm')}`;

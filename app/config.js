@@ -18,6 +18,7 @@ System.config({
     "babel-runtime": "npm:babel-runtime@5.8.35",
     "core-js": "npm:core-js@1.2.6",
     "events": "github:jspm/nodelibs-events@0.1.1",
+    "jquery": "npm:jquery@2.2.1",
     "moment": "npm:moment@2.11.2",
     "react": "npm:react@0.14.7",
     "react-dom": "npm:react-dom@0.14.7",

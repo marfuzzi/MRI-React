@@ -1,32 +1,66 @@
 import EventEmitter from 'events';
+import moment from 'moment';
+import $ from 'jquery';
 
 const CHANGE_EVENT = 'change';
-
-class MeetingRoomStore extends EventEmitter {
-    
-    getAll() {
-        return [
+const meetingRooms = [
             {
                 email: 'a@here.com',
                 name: "1",
-                schedule: [{organizer: 'Tyler', startTime: 1457112240000, endTime: 1457119440000}]
+                schedule: null
             },
             {
                 email: 'b@here.com',
                 name: "2",
-                schedule: [{organizer: 'Bok', startTime: 1457112240000, endTime: 1457119440000}]
+                schedule: null
             },
             {
                 email: 'c@here.com',
                 name: "3",
-                schedule: []
+                schedule: null
             },
             {
                 email: 'd@here.com',
                 name: "4",
-                schedule: [{organizer: 'Steve', startTime: 1457112240000, endTime: 1457119440000}]
+                schedule: null
             }
         ];
+
+class MeetingRoomStore extends EventEmitter {
+    
+    constructor() {
+        super();
+        this.updateSchedules();
+        window.setInterval(() => {
+            this.updateSchedules();
+        }, 10000);
+    }
+    
+    updateSchedules() {
+        meetingRooms.forEach(room => {
+            this.getSchedule(room.email).done(schedule => {
+                room.schedule = schedule;
+                emitChange();
+            });
+        });
+    }
+    
+    getAll() {
+        return meetingRooms;
+    };
+    
+    getSchedule(email) {
+        var now = moment();
+        var start = now.toISOString();
+        var end = now.endOf('day');
+        return $.get("/office365/users/" + email + "/calendarview?startdatetime=" + start + "&enddatetime=" + end.toISOString() + "&$orderby=Start&$filter=IsCancelled eq false")
+            .done(response => {
+                return response.data.value
+            })
+            .fail(error => {
+                console.log(error);
+                return null
+            });
     }
     
     emitChange() {
