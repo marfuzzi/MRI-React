@@ -18,7 +18,7 @@ export default class MeetingDetail extends React.Component{
         return (
             <div className="meeting-room-content">
                 <span className="status">
-                    <div className="status-message">{statusMessage}</div>
+                    <div className={this.props.meeting ? 'status-message' : 'error-message'}>{statusMessage}</div>
                     {organizerNode}
                 </span>
             </div>
