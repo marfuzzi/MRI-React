@@ -38,11 +38,18 @@ class MeetingRoomStore extends EventEmitter {
     
     updateSchedules() {
         meetingRooms.forEach(room => {
-            this.getSchedule(room.email).done(schedule => {
-                room.schedule = schedule;
-                emitChange();
+            this.getSchedule(room.email)
+                .done(data => {
+                    room.schedule = data.value.map(apiMeeting => {
+                        return {
+                            organizer: apiMeeting.Organizer.EmailAddress.Name,
+                            startTime: apiMeeting.Start,
+                            endTime: apiMeeting.End
+                        };
+                });
             });
         });
+        this.emitChange();        
     }
     
     getAll() {
@@ -55,7 +62,7 @@ class MeetingRoomStore extends EventEmitter {
         var end = now.endOf('day');
         return $.get("/office365/users/" + email + "/calendarview?startdatetime=" + start + "&enddatetime=" + end.toISOString() + "&$orderby=Start&$filter=IsCancelled eq false")
             .done(response => {
-                return response.data.value
+                return response.value
             })
             .fail(error => {
                 console.log(error);
