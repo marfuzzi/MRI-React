@@ -23,7 +23,8 @@ export default class MeetingRoom extends React.Component {
             isAvailable = this.isAvailable(firstMeeting);
             classesProp += ` ${isAvailable ? 'free-room' : 'busy-room'}`;
             
-            if (!isAvailable) nextMeetingNode = <NextMeetingDetail meeting={this.props.room.schedule[1]}/>
+            const nextMeeting = this.props.room.schedule[1];
+            if (!isAvailable && nextMeeting) nextMeetingNode = <NextMeetingDetail meeting={this.props.room.schedule[1]}/>
         }
         
         return (
