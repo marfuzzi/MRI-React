@@ -4,6 +4,7 @@
  To use this app:
  
  npm install
+ npm install jspm -g
  jspm install
- Enter meeting room details at rooms-config.js
+ Copy app/rooms-config.js and enter meeting room details at app/app-config/rooms-config.js
  npm start app
