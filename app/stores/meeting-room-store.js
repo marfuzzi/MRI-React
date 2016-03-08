@@ -1,6 +1,7 @@
 import EventEmitter from 'events';
 
 import MEETING_ROOMS from '../app-config/rooms-config.js';
+import MEETING_ROOM_CONSTANTS from '../constants/meeting-room-constants.js';
 import MeetingRoomDispatcher from '../meeting-room-dispatcher.js';
 
 const CHANGE_EVENT = 'change';
@@ -21,7 +22,7 @@ class MeetingRoomStore extends EventEmitter {
     
     onActionReceived(action) {
         switch (action.actionType) {
-            case 'SCHEDULE_UPDATED': {
+            case MEETING_ROOM_CONSTANTS.SCHEDULE_UPDATED: {
                 this.updateSchedule(action.room, action.newSchedule);
                 break;
             }

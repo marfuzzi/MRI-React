@@ -1,9 +1,8 @@
 import $ from 'jquery';
 import moment from 'moment';
 
-import MeetingRoomDispatcher from './meeting-room-dispatcher.js';
-
 import MEETING_ROOMS from './app-config/rooms-config.js';
+import MeetingRoomActions from './actions/meeting-room-action-creator.js';
 
 class SchedulePollingService {
     
@@ -25,17 +24,13 @@ class SchedulePollingService {
                 return null;
             })
             .always((data) => {
-                MeetingRoomDispatcher.dispatch({
-                    actionType: 'SCHEDULE_UPDATED',
-                    room: room,
-                    newSchedule: data.value.map(meeting => {
-                        return {
-                            organizer: meeting.Organizer.EmailAddress.Name,
-                            startTime: meeting.Start,
-                            endTime: meeting.End
-                        };
-                    })   
-                });
+                MeetingRoomActions.updateSchedule(room, data.value.map(meeting => {
+                    return {
+                        organizer: meeting.Organizer.EmailAddress.Name,
+                        startTime: meeting.Start,
+                        endTime: meeting.End
+                    };
+                }));
             });
     }
 }
