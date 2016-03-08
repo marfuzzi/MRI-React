@@ -3,29 +3,34 @@ import moment from 'moment';
 
 import MeetingRoomName from './meeting-room-name.js';
 import MeetingDetail from './meeting-detail.js';
+import NextMeetingDetail from './next-meeting-detail.js';
 
 export default class MeetingRoom extends React.Component {
     
-    isAvailable(nextMeeting) {
-        if (!nextMeeting) return true;
-        if (moment(nextMeeting.startTime).isBefore(moment())) return false;
+    isAvailable(firstMeeting) {
+        if (!firstMeeting) return true;
+        if (moment(firstMeeting.startTime).isBefore(moment())) return false;
         return true;
     }
     
     render() {
-        const nextMeeting = this.props.room.schedule && this.props.room.schedule[0];
+        const firstMeeting = this.props.room.schedule && this.props.room.schedule[0];
         let classesProp = `room meeting-room-${this.props.room.name}`;
         let isAvailable;
+        let nextMeetingNode;
         
-        if(nextMeeting !== null) {
-            isAvailable = this.isAvailable(nextMeeting);
+        if(firstMeeting !== null) {
+            isAvailable = this.isAvailable(firstMeeting);
             classesProp += ` ${isAvailable ? 'free-room' : 'busy-room'}`;
+            
+            if (!isAvailable) nextMeetingNode = <NextMeetingDetail meeting={this.props.room.schedule[1]}/>
         }
         
         return (
             <div className={classesProp}>
                 <MeetingRoomName name={this.props.room.name} />    
-                <MeetingDetail isAvailable={isAvailable} meeting={nextMeeting} />
+                <MeetingDetail isAvailable={isAvailable} meeting={firstMeeting} />
+                {nextMeetingNode}
             </div>
         );
     }
