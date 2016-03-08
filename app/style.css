@@ -36,8 +36,7 @@ input {
 }
 
 #lobby-layout {
-    width: 50%;
-    height: auto;
+    height: 50%;
     opacity: 0.3;
     margin-top: 20px;
 }

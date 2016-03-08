@@ -10,6 +10,13 @@ class MeetingRoomActions {
             newSchedule: schedule  
         });
     }
+    
+    tick(time) {
+        MeetingRoomDispatcher.dispatch({
+            actionType: MEETING_ROOM_CONSTANTS.TICK,
+            time: time
+        })
+    }
 }
 
 export default new MeetingRoomActions();
