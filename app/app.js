@@ -3,6 +3,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import './schedule-polling-service.js';
 import MeetingRoomApp from './components/meeting-room-app';
 
 ReactDOM.render(
