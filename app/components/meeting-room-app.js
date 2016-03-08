@@ -1,12 +1,9 @@
 import React from 'react';
-import moment from 'moment';
 
 import MeetingRoom from './meeting-room.js';
 import TimeDisplay from './time-display.js';
 import MeetingRoomStore from '../stores/meeting-room-store.js';
-import MeetingRoomDispatcher from '../meeting-room-dispatcher.js';
-import MEETING_ROOM_CONSTANTS from '../constants/meeting-room-constants.js';
-
+import TimeStore from '../stores/time-store.js';
 
 export default class MeetingRoomApp extends React.Component {
     
@@ -17,26 +14,21 @@ export default class MeetingRoomApp extends React.Component {
             this.setState(this.getMeetingRoomStates());   
         }
         
-        this.onTick = action => {
-            switch (action.actionType) {
-                case MEETING_ROOM_CONSTANTS.TICK: {
-                    this.setState({
-                        time: action.time
-                    });
-                    break;                    
-                }
-            }
+        this.onTick = () => {
+            this.setState({
+                time: TimeStore.getTime()
+            });    
         }
     }
     
     componentDidMount() {
         MeetingRoomStore.addChangeListener(this.onChange);
-        this.onTickToken = MeetingRoomDispatcher.register(this.onTick);
+        TimeStore.addChangeListener(this.onTick);
     }
     
     componentWillUnmount() {
         MeetingRoomStore.removeChangeListener(this.onChange);
-        MeetingRoomDispatcher.unregister(this.onTickToken);
+        TimeStore.removeChangeListener(this.onTick);
     }
     
     render() {
@@ -64,7 +56,7 @@ export default class MeetingRoomApp extends React.Component {
     getStartingState() {
         return {
             meetingRooms: MeetingRoomStore.getAll(),
-            time: moment()
+            time: TimeStore.getTime()
         }
     }
     
