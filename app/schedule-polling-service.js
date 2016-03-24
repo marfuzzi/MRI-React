@@ -24,13 +24,16 @@ class SchedulePollingService {
                 return null;
             })
             .always((data) => {
-                MeetingRoomActions.updateSchedule(room, data.value.map(meeting => {
-                    return {
-                        organizer: meeting.Organizer.EmailAddress.Name,
-                        startTime: meeting.Start,
-                        endTime: meeting.End
-                    };
-                }));
+                const schedule = data.value 
+                    ? data.value.map(meeting => {
+                        return {
+                            organizer: meeting.Organizer.EmailAddress.Name,
+                            startTime: meeting.Start,
+                            endTime: meeting.End
+                        };
+                    }) 
+                    : null;
+                MeetingRoomActions.updateSchedule(room, schedule);
             });
     }
 }
