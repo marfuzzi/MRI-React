@@ -1,63 +1,23 @@
-import React from 'react';
+import React from 'react'
+import { connect } from 'react-redux'
 
-import MeetingRoom from './meeting-room.js';
-import TimeDisplay from './time-display.js';
-import MeetingRoomStore from '../stores/meeting-room-store.js';
-import TimeStore from '../stores/time-store.js';
+import MeetingRoom from './meeting-room'
+import TimeDisplay from './time-display'
 
-export default class MeetingRoomApp extends React.Component {
-    
-    constructor(props) {
-        super(props);
-        this.state = this.getStartingState();
-        this.onChange = () => {
-            this.setState(this.getMeetingRoomStates());   
-        }
-        
-        this.onTick = () => {
-            this.setState({
-                time: TimeStore.getTime()
-            });    
-        }
-    }
-    
-    componentDidMount() {
-        MeetingRoomStore.addChangeListener(this.onChange);
-        TimeStore.addChangeListener(this.onTick);
-    }
-    
-    componentWillUnmount() {
-        MeetingRoomStore.removeChangeListener(this.onChange);
-        TimeStore.removeChangeListener(this.onTick);
-    }
-    
-    render() {
-        const meetingRoomNodes = this.state.meetingRooms.map(meetingRoom => {
-            return <MeetingRoom key={meetingRoom.name} room={meetingRoom} />
-        });
-        
-        return (
-            <div className="meeting-rooms">
-                <div className="center-display">
-                    <TimeDisplay time={this.state.time}/>
-                    <img id="lobby-layout" src="assets/meeting-room.png"/>
-                </div>
-                {meetingRoomNodes}
-            </div>
-        );
-    }
-    
-    getMeetingRoomStates() {
-        return {
-            meetingRooms: MeetingRoomStore.getAll()
-        };
-    }
-    
-    getStartingState() {
-        return {
-            meetingRooms: MeetingRoomStore.getAll(),
-            time: TimeStore.getTime()
-        }
-    }
-    
+export const MeetingRoomApp = ({ rooms, time }) => (
+  <div className="meeting-rooms">
+    <div className="center-display">
+      <TimeDisplay time={time} />
+      <img id="lobby-layout" src="assets/meeting-room.png" />
+    </div>
+    {rooms.map(room => <MeetingRoom key={room.name} room={room} />)}
+  </div>
+)
+
+function mapStateToProps(state) {
+  return state
 }
+
+export default connect(
+  mapStateToProps
+)(MeetingRoomApp)

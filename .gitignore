@@ -3,3 +3,4 @@ app/jspm_packages/
 npm-debug.log
 app/app-config/rooms-config.js
 typings/
+.vscode/

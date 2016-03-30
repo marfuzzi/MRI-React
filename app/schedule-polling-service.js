@@ -1,48 +1,49 @@
-import $ from 'jquery';
-import moment from 'moment';
+import $ from 'jquery'
+import moment from 'moment'
+import store from '../stores/store'
 
-import MEETING_ROOMS from './app-config/rooms-config.js';
-import MeetingRoomActions from './actions/meeting-room-action-creator.js';
+import MEETING_ROOMS from './app-config/rooms-config.js'
+import MeetingRoomActions from './actions/meeting-room-action-creator.js'
 
 class SchedulePollingService {
-    
-    poll(room, interval) {
-        this.get(room);
-        window.setInterval(() => {
-            this.get(room);
-        }, interval);
-    }
-    
-    get(room) {
-        const url = "/office365/users/" + room.email + "/calendarview?startdatetime=" + moment().toISOString() + "&enddatetime=" + moment().endOf('day').toISOString() + "&$orderby=Start&$filter=IsCancelled eq false";   
-        return $.get(url)
-            .done(response => {
-                return response.value
-            })
-            .fail(error => {
-                console.log(error);
-                return null;
-            })
-            .always((data) => {
-                const schedule = data.value 
-                    ? data.value.map(meeting => {
-                        return {
-                            organizer: meeting.Organizer.EmailAddress.Name,
-                            startTime: meeting.Start,
-                            endTime: meeting.End
-                        };
-                    }) 
-                    : null;
-                MeetingRoomActions.updateSchedule(room, schedule);
-            });
-    }
+
+  poll(room, interval) {
+    this.get(room)
+    window.setInterval(() => {
+      this.get(room)
+    }, interval)
+  }
+
+  get(room) {
+    const url = "/office365/users/" + room.email + "/calendarview?startdatetime=" + moment().toISOString() + "&enddatetime=" + moment().endOf('day').toISOString() + "&$orderby=Start&$filter=IsCancelled eq false"
+    return $.get(url)
+      .done(response => {
+        return response.value
+      })
+      .fail(error => {
+        console.log(error)
+        return null
+      })
+      .always((data) => {
+        const schedule = data.value
+          ? data.value.map(meeting => {
+            return {
+              organizer: meeting.Organizer.EmailAddress.Name,
+              startTime: meeting.Start,
+              endTime: meeting.End,
+            }
+          })
+          : null
+        store.dispatch(MeetingRoomActions.updateSchedule(room, schedule))
+      })
+  }
 }
 
-const pollingService = new SchedulePollingService();
+const pollingService = new SchedulePollingService()
 
 MEETING_ROOMS.forEach(ROOM => {
-    pollingService.poll(ROOM, 10000);
-});
+  pollingService.poll(ROOM, 10000)
+})
 
-export default pollingService;
+export default pollingService
 

@@ -1,22 +1,21 @@
-import MeetingRoomDispatcher from '../meeting-room-dispatcher.js';
-import MEETING_ROOM_CONSTANTS from '../constants/meeting-room-constants.js';
+import MEETING_ROOM_CONSTANTS from '../constants/meeting-room-constants'
 
 class MeetingRoomActions {
-    
-    updateSchedule(room, schedule) {
-        MeetingRoomDispatcher.dispatch({
-            actionType: MEETING_ROOM_CONSTANTS.SCHEDULE_UPDATED,
-            room: room,
-            newSchedule: schedule  
-        });
+
+  updateSchedule(room, schedule) {
+    return {
+      type: MEETING_ROOM_CONSTANTS.SCHEDULE_UPDATED,
+      room,
+      newSchedule: schedule,
     }
-    
-    tick(time) {
-        MeetingRoomDispatcher.dispatch({
-            actionType: MEETING_ROOM_CONSTANTS.TICK,
-            time: time
-        })
+  }
+
+  tick(time) {
+    return {
+      type: MEETING_ROOM_CONSTANTS.TICK,
+      time,
     }
+  }
 }
 
-export default new MeetingRoomActions();
+export default new MeetingRoomActions()
